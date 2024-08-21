@@ -17,32 +17,33 @@ print(f'Public IP Address: {ip}')
 load_dotenv()
 
 TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
-APP_ID = int(os.environ.get("APP_ID", "28277294"))
-API_HASH = os.environ.get("API_HASH", "7ec1420b010830ad701cf518ce0474580")
+APP_ID = int(os.environ.get("APP_ID", ""))
+API_HASH = os.environ.get("API_HASH", "")
 
+# Owner User name and Owner Id
+OWNER = os.environ.get("OWNER", "")  
+OWNER_ID = int(os.environ.get("OWNER_ID", ""))
 
-OWNER = os.environ.get("OWNER", "@ULTIMATE_GUARDIAN_X")  # Owner username
-OWNER_ID = int(os.environ.get("OWNER_ID", "1768198143"))  # Owner user id
+# Your Mongo Url 
 DB_URL = os.environ.get("DB_URL", "")
 DB_NAME = os.environ.get("DB_NAME", "")
 
-
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002122561727"))
+# Telegram Channel Id's
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", ""))
 FORCE_SUB_CHANNEL1 = int(os.environ.get("FORCE_SUB_CHANNEL1", "0"))
 FORCE_SUB_CHANNEL2 = int(os.environ.get("FORCE_SUB_CHANNEL2", "0"))
-FORCE_SUB_CHANNEL3 = int(os.environ.get("FORCE_SUB_CHANNEL3", "0"))
 
 
-SECONDS = int(os.getenv("SECONDS", "600"))  # auto delete in seconds
+SECONDS = int(os.getenv("SECONDS", "600"))  # Auto delete in seconds
 
 
 PORT = os.environ.get("PORT", "8080")
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "1"))
 
 
-# start message
+# Start message
 START_MSG = os.environ.get(
-    "START_MESSAGE", "<b>🌸 ᴀʀɪɢᴀᴛᴏᴜ, {first}!\n\n 🌸 ᴇᴍʙʀᴀᴄᴇ ᴛʜᴇ ᴀɴɪᴍᴇ ᴍᴀɢɪᴄ! ʜᴇʀᴇ, ᴘɪxᴇʟꜱ ᴅᴀɴᴄᴇ, ꜱᴛᴏʀɪᴇꜱ ᴜɴꜰᴏʟᴅ, ᴀɴᴅ ᴇᴍᴏᴛɪᴏɴꜱ ɪɢɴɪᴛᴇ. ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴏᴜʀ ꜱᴀɴᴄᴛᴜᴀʀʏ—ᴀ ᴘʟᴀᴄᴇ ᴡʜᴇʀᴇ ᴀɴɪᴍᴇ ᴅʀᴇᴀᴍꜱ ᴛᴀᴋᴇ ꜰʟɪɢʜᴛ. ᴇɴᴊᴏʏ ᴛʜᴇ ᴊᴏᴜʀɴᴇʏ! 🌟</b>")
+    "START_MESSAGE", "Yo {first} {last}\n\nI am File Store i provide you coolest file on internet")
 
 try:
     ADMINS = [6450266465]
@@ -69,6 +70,9 @@ USER_REPLY_TEXT = "❌ʙᴀᴋᴀᴀ! ᴅᴏɴ'ᴛ ꜱᴇɴᴅ ᴍᴇ ᴍᴇꜱ�
 ADMINS.append(OWNER_ID)
 ADMINS.append(6450266465)
 
+
+
+# Don't Change Any Think Here 
 LOG_FILE_NAME = "filesharingbot.txt"
 
 logging.basicConfig(
