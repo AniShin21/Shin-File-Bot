@@ -83,7 +83,31 @@ async def start_command(client: Client, message: Message):
             disable_web_page_preview=True,
             quote=True
         )
+        if START_PIC == True:
+            reply_markup = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "ᴀʙᴏᴜᴛ", callback_data="about"),
+                    InlineKeyboardButton(
+                        "ᴄʟᴏꜱᴇ", callback_data="close")
+                ]
+            ]
+        )
+        await message.reply_photo(
+            photo= START_PIC,
+            caption= START_MSG.format(
+                first = message.from_user.first_name,
+                last = message.from_user.last_name,
+                username = None if not message.from_user.username else '@' + message.from_user.username,
+                mention = message.from_user.mention,
+                id = message.from_user.id
+            ),
+            reply_markup = reply_markup,
+            
+        )
         return
+        
 
     # Notify user that content is being prepared
     temp_msg = await message.reply("!! ᴄᴏɴᴛᴇɴᴛ ᴠᴇᴛᴛɪɴɢ !!")
