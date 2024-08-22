@@ -82,13 +82,15 @@ async def start_command(client: Client, message: Message):
             except:
                 pass
                 
-        k = await message.reply_text("<b><u>❗Important❗</u></b><b><i>\nYo! Bro This File Will Be Deleted In 5 Min\nPlease Save It in Your Saved Messages Then Downloard It 🥺✨</i></b>")
+        Kill_file = await message.reply_text("<b><u>❗Important❗</u></b><b><i>\nYo! Bro This File Is Going Be Deleted In 10 Min\nPlease Save It in Your Saved Messages Then Downloard It 🥺✨</i></b>")
         await asyncio.sleep(SECONDS)
 
         for snt_msg in snt_msgs:
             try:
                 await snt_msg.delete()
-                await k.edit_text("Your File/Video Is Successfully Deleted ✅")
+                await Kill_file.edit_text("Bruh! Your File is already gone")
+                await asyncio.sleep(300)
+                await Kill_file.delete()
             except:
                 pass
         return
@@ -130,120 +132,8 @@ async def start_command(client: Client, message: Message):
             reply_markup = reply_markup,
             
         )
+        return
         
-
-    # Notify user that content is being prepared
-    temp_msg = await message.reply("!! ᴄᴏɴᴛᴇɴᴛ ᴠᴇᴛᴛɪɴɢ !!")
-
-    try:
-        messages = await get_messages(client, ids)
-
-    except Exception as e:
-        print(f"Error fetching messages: {e}")
-        await temp_msg.edit_text("ᴇʀʀᴏʀ ꜰᴇᴛᴄʜɪɴɢ ᴄᴏɴᴛᴇɴᴛ. ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.")
-        return
-
-    if not messages:
-        sent_msg = await message.reply_text("ɴɪɢɢᴀ ʏᴏᴜ ʟᴀᴛᴇ. ɢᴇᴛ ʏᴏᴜʀ ᴀss ɪɴ ʜᴇʀᴇ ɪɴ ᴛɪᴍᴇ")
-
-        # Auto delete the message after 7 seconds
-        await asyncio.sleep(7)
-        try:
-            await sent_msg.delete()
-        except Exception as e:
-            print(f"Error deleting message: {e}")
-
-        return
-
-    # Delete the temporary message before sharing files
-    await temp_msg.delete()
-
-    sent_messages = []
-    found_files = False
-
-    for msg in messages:
-        # Check if the message is empty (no document)
-        if msg.document is None:
-            # Skip empty files
-            continue
-
-        found_files = True
-
-        # Generate caption based on configuration
-        if bool(CUSTOM_CAPTION) and bool(msg.document):
-            caption = CUSTOM_CAPTION.format(
-                previouscaption="" if not msg.caption else msg.caption.html,
-                filename=msg.document.file_name
-            )
-        else:
-            caption = "" if not msg.caption else msg.caption.html
-
-        # Determine reply markup based on configuration
-        if DISABLE_CHANNEL_BUTTON:
-            reply_markup = msg.reply_markup
-        else:
-            reply_markup = None
-
-        try:
-            # Copy message to user with specified settings
-            copied_msg = await msg.copy(
-                chat_id=message.from_user.id,
-                caption=caption,
-                parse_mode=ParseMode.HTML,
-                reply_markup=reply_markup,
-                protect_content=PROTECT_CONTENT
-            )
-            sent_messages.append(copied_msg)
-
-        except FloodWait as e:
-            await asyncio.sleep(e.x)
-            copied_msg = await msg.copy(
-                chat_id=message.from_user.id,
-                caption=caption,
-                parse_mode=ParseMode.HTML,
-                reply_markup=reply_markup,
-                protect_content=PROTECT_CONTENT
-            )
-            sent_messages.append(copied_msg)
-
-        except:
-            pass
-
-    if found_files:
-        # Notify the user about the deletion process and wait before deletion
-        deletion_msg = await client.send_message(
-            chat_id=message.from_user.id,
-            text="<b>𝐀𝐭𝐭𝐞𝐧𝐭𝐢𝐨𝐧! 🚨</b>\n\n  𝐃𝐮𝐞 𝐓𝐨 𝐚 <a href='tg://user?id=7065803173'>𝐌𝐚𝐝 𝐂𝐚𝐭</a> 𝐓𝐡𝐢𝐬 𝐅𝐢𝐥𝐞 𝐖𝐢𝐥𝐥 𝐁𝐞 𝐝𝐞𝐥𝐞𝐭𝐞𝐝 𝐢𝐧 10 𝐦𝐢𝐧𝐮𝐭𝐞𝐬! 😱\n 🔥 𝐐𝐮𝐢𝐜𝐤𝐥𝐲, 𝐬𝐡𝐚𝐫𝐞 𝐭𝐡𝐢𝐬 𝐟𝐢𝐥𝐞 𝐭𝐨 𝐲𝐨𝐮𝐫 𝐬𝐞𝐜𝐫𝐞𝐭 𝐬𝐭𝐚𝐬𝐡 𝐨𝐫 𝐬𝐨𝐦𝐞𝐰𝐡𝐞𝐫𝐞 𝐬𝐚𝐟𝐞 𝐭𝐨 𝐩𝐫𝐞𝐯𝐞𝐧𝐭 𝐢𝐭𝐬 𝐝𝐞𝐦𝐢𝐬𝐞! 📂\n  👀 𝐇𝐞’𝐬 𝐜𝐨𝐦𝐢𝐧𝐠 𝐭𝐨 𝐝𝐞𝐥𝐞𝐭𝐞 𝐲𝐨𝐮𝐫 𝐟𝐢𝐥𝐞! 𝐀𝐜𝐭 𝐧𝐨𝐰! 🏃‍♂️💨",
-            parse_mode=ParseMode.HTML
-        )
-
-        await asyncio.sleep(SECONDS)
-
-        # Delete each sent message and update the user
-        for msg in sent_messages:
-            try:
-                await msg.delete()
-
-            except Exception as e:
-                print(f"Error deleting message: {e}")
-                pass
-
-        # Inform user about completion of deletion process
-        await deletion_msg.edit_text("<b><i>Sorry Dude😞</i></b>\n\n𝐓𝐡𝐚𝐭 𝐋𝐢𝐭𝐭𝐥𝐞 <a href='tg://user?id=7065803173'>𝐂𝐚𝐭</a> 𝐃𝐞𝐥𝐞𝐭𝐞𝐝 𝐘𝐨𝐮 𝐅𝐢𝐥𝐞🤬")
-
-    else:
-        # No files found, inform the user
-        sent_msg = await message.reply_text("ɴɪɢɢᴀ ʏᴏᴜ ʟᴀᴛᴇ. ɢᴇᴛ ʏᴏᴜʀ ᴀss ɪɴ ʜᴇʀᴇ ɪɴ ᴛɪᴍᴇ")
-
-        # Auto delete the message after 7 seconds
-        await asyncio.sleep(7)
-        try:
-            await sent_msg.delete()
-        except Exception as e:
-            print(f"Error deleting message: {e}")
-    return
-
-
 # =====================================================================================##
 
 WAIT_MSG = """"<b>Processing ...</b>"""
