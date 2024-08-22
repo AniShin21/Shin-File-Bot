@@ -29,6 +29,11 @@ async def start_command(client: Client, message: Message):
     text = message.text
 
     if len(text) > 7:
+        if START_PIC == True:
+            
+    if len(text) > 7:
+        if START_PIC == True:
+            
         try:
             base64_string = text.split(" ", 1)[1]
             string = await decode(base64_string)
@@ -83,8 +88,41 @@ async def start_command(client: Client, message: Message):
             disable_web_page_preview=True,
             quote=True
         )
-        if START_PIC == True:
-            reply_markup = InlineKeyboardMarkup(
+    else:
+            
+        try:
+            base64_string = text.split(" ", 1)[1]
+            string = await decode(base64_string)
+            argument = string.split("-")
+
+            if len(argument) == 3:
+                try:
+                    start = int(int(argument[1]) / abs(client.db_channel.id))
+                    end = int(int(argument[2]) / abs(client.db_channel.id))
+                    ids = range(start, end + 1) if start <= end else []
+
+                except Exception as e:
+                    print(f"Error parsing argument: {e}")
+                    return
+
+            elif len(argument) == 2:
+                try:
+                    ids = [int(int(argument[1]) / abs(client.db_channel.id))]
+
+                except Exception as e:
+                    print(f"Error parsing argument: {e}")
+                    return
+
+            else:
+                return
+
+        except Exception as e:
+            print(f"Error decoding argument: {e}")
+            return
+
+    else:
+        # No command with arguments, handle the 'else' block
+        reply_markup = InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
@@ -94,19 +132,18 @@ async def start_command(client: Client, message: Message):
                 ]
             ]
         )
-        await message.reply_photo(
-            photo= START_PIC_URL,
-            caption= START_MSG.format(
-                first = message.from_user.first_name,
-                last = message.from_user.last_name,
-                username = None if not message.from_user.username else '@' + message.from_user.username,
-                mention = message.from_user.mention,
-                id = message.from_user.id
+        await message.reply_text(
+            text=START_MSG.format(
+                first=message.from_user.first_name,
+                last=message.from_user.last_name,
+                username=None if not message.from_user.username else '@' + message.from_user.username,
+                mention=message.from_user.mention,
+                id=message.from_user.id
             ),
-            reply_markup = reply_markup,
-            
+            reply_markup=reply_markup,
+            disable_web_page_preview=True,
+            quote=True
         )
-        return
         
 
     # Notify user that content is being prepared
