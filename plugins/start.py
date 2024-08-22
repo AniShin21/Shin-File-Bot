@@ -5,7 +5,7 @@ from pyrogram.enums import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 from bot import Bot
-from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
+from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT, START_PIC, START_PIC_URL
 from helper_func import subscribed, decode, get_messages
 from database.database import add_user, present_user, del_user, full_userbase
 
@@ -95,7 +95,7 @@ async def start_command(client: Client, message: Message):
             ]
         )
         await message.reply_photo(
-            photo= START_PIC,
+            photo= START_PIC_URL,
             caption= START_MSG.format(
                 first = message.from_user.first_name,
                 last = message.from_user.last_name,
