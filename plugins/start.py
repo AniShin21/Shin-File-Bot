@@ -28,12 +28,9 @@ async def start_command(client: Client, message: Message):
 
     text = message.text
 
-    if len(text) > 7:
-        if START_PIC == True:
-            
-    if len(text) > 7:
-        if START_PIC == True:
-            
+    if START_PIC == True:
+        try:
+            if len(text) > 7:
         try:
             base64_string = text.split(" ", 1)[1]
             string = await decode(base64_string)
@@ -89,7 +86,7 @@ async def start_command(client: Client, message: Message):
             quote=True
         )
     else:
-            
+    if len(text) > 7:
         try:
             base64_string = text.split(" ", 1)[1]
             string = await decode(base64_string)
@@ -144,6 +141,7 @@ async def start_command(client: Client, message: Message):
             disable_web_page_preview=True,
             quote=True
         )
+
         
 
     # Notify user that content is being prepared
