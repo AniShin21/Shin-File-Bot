@@ -44,7 +44,7 @@ elif data == "prenium":
         
         °If You Have Anime Bot Then You Will Get a Spicial Feature 
          /top, /weekly, /search <Anime Name> With These Commands
-         """),
+         """,
 reply_markup=InlineKeyboardMarkup(
     [
         [
@@ -52,5 +52,4 @@ reply_markup=InlineKeyboardMarkup(
         ]
     ]
 )
-
-        
+    )       
