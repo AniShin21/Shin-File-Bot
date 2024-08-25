@@ -15,6 +15,9 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 [
                     [
                         InlineKeyboardButton("ᴄʟᴏꜱᴇ", callback_data="close")
+                    ],
+                    [
+                        InlineKeyoardButton("Premium", callback_data="premium")
                     ]
                 ]
             )
@@ -25,3 +28,12 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             await query.message.reply_to_message.delete()
         except:
             pass
+
+elif data == "prenium":
+    await query.message.edit_text(
+        text=f"""
+        Yo {first}{last}
+        This Premium Feature Is About GitHub Repo
+        °
+
+        
