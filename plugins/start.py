@@ -120,6 +120,8 @@ async def start_command(client: Client, message: Message):
             reply_markup = reply_markup,
             
         )
+        return
+        
         else:
             await message.reply_text(
             text= START_MSG.format(
