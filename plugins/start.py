@@ -110,7 +110,7 @@ async def start_command(client: Client, message: Message):
         if START_PIC == True:
             await message.reply_photo(
             photo= START_PIC,
-            text= START_MSG.format(
+            caption= START_MSG.format(
                 first = message.from_user.first_name,
                 last = message.from_user.last_name,
                 username = None if not message.from_user.username else '@' + message.from_user.username,
